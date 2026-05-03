@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Record Stream</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #0f0f0f;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+        }
+        .container {
+            text-align: center;
+            background: #1e1e1e;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            width: 300px;
+        }
+        h1 { font-size: 1.5rem; margin-bottom: 20px; color: #ff0055; }
+        
+        .status { margin-bottom: 20px; font-size: 0.9rem; opacity: 0.7; }
+
+        audio { width: 100%; margin-top: 10px; }
+
+        /* Стильная кнопка запуска */
+        .play-btn {
+            background: #ff0055;
+            border: none;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            transition: transform 0.2s;
+        }
+        .play-btn:hover { transform: scale(1.1); }
+        .play-btn svg { fill: white; width: 30px; height: 30px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Radio Record</h1>
+    <div class="status" id="status">Нажмите Play, чтобы слушать</div>
+    
+    <button class="play-btn" onclick="togglePlay()" id="mainBtn">
+        <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+    </button>
+
+    <audio id="radio">
+        <source src="https://hostingradio.ru" type="audio/aac">
+    </audio>
+</div>
+
+<script>
+    const audio = document.getElementById('radio');
+    const status = document.getElementById('status');
+    const playIcon = document.getElementById('playIcon');
+
+    function togglePlay() {
+        if (audio.paused) {
+            audio.play();
+            status.innerText = "В эфире: Record Main";
+            playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>'; // Иконка паузы
+        } else {
+            audio.pause();
+            status.innerText = "Пауза";
+            playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>'; // Иконка плея
+        }
+    }
+</script>
+
+</body>
+</html>
